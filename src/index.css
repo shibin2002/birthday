@@ -1,0 +1,156 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Playfair Display', serif;
+  background: linear-gradient(135deg, #FFE4E6 0%, #FFF8DC 50%, #F7E7CE 100%);
+  min-height: 100vh;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FFE4E6;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #FFC1CC;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #FFB3BA;
+}
+
+/* Hide scrollbar for horizontal scroll */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Floating hearts animation */
+.floating-hearts {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.heart {
+  position: absolute;
+  color: #FFC1CC;
+  font-size: 20px;
+  animation: float-up 8s linear infinite;
+  opacity: 0.7;
+}
+
+@keyframes float-up {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.7;
+  }
+  90% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Sparkle effects */
+.sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #F7E7CE;
+  border-radius: 50%;
+  animation: sparkle 3s linear infinite;
+}
+
+/* Music button styles - REMOVED */
+
+/* Typewriter effect */
+.typewriter {
+  overflow: hidden;
+  border-right: 2px solid #FFC1CC;
+  white-space: nowrap;
+  animation: typewriter 4s steps(40) 1s forwards, blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50% { border-color: #FFC1CC; }
+  51%, 100% { border-color: transparent; }
+}
+
+/* Card hover effects */
+.love-card {
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+}
+
+.love-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(255, 179, 186, 0.3);
+}
+
+/* Polaroid photo effect - responsive */
+.polaroid {
+  background: white;
+  padding: 8px 8px 24px 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transform: rotate(-2deg);
+  transition: all 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .polaroid {
+    padding: 10px 10px 40px 10px;
+  }
+}
+
+.polaroid:nth-child(even) {
+  transform: rotate(2deg);
+}
+
+.polaroid:hover {
+  transform: rotate(0deg) scale(1.05);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* Surprise animation */
+.surprise-animation {
+  animation: surprise-bounce 0.6s ease-out;
+}
+
+@keyframes surprise-bounce {
+  0% { transform: scale(0) rotate(0deg); }
+  50% { transform: scale(1.2) rotate(180deg); }
+  100% { transform: scale(1) rotate(360deg); }
+}
