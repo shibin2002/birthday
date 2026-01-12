@@ -1,21 +1,811 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#FFE4E6" />
-    <meta name="description" content="Happy Birthday Asna - A special website made with love" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Asna ❤️</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     
-    <title>Happy Birthday Asna ❤️</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-  </body>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'romantic-pink': '#FFE4E6',
+                        'blush': '#FFC1CC',
+                        'cream': '#FFF8DC',
+                        'light-gold': '#F7E7CE',
+                        'pastel-red': '#FFB3BA',
+                        'soft-pink': '#F8BBD9'
+                    },
+                    fontFamily: {
+                        'cursive': ['Dancing Script', 'cursive'],
+                        'elegant': ['Playfair Display', 'serif'],
+                        'romantic': ['Great Vibes', 'cursive']
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-heart': 'pulse-heart 2s ease-in-out infinite',
+                        'sparkle': 'sparkle 3s linear infinite',
+                        'scroll-left': 'scroll-left 12s linear infinite'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, #FFE4E6 0%, #FFF8DC 50%, #F7E7CE 100%);
+            min-height: 100vh;
+        }
+
+        /* Custom animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse-heart {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes scroll-left {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        @keyframes typewriter {
+            0% { width: 0; }
+            100% { width: 100%; }
+        }
+
+        @keyframes blink {
+            0%, 50% { border-color: #FFC1CC; }
+            51%, 100% { border-color: transparent; }
+        }
+
+        /* Floating hearts */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            color: #FFC1CC;
+            font-size: 20px;
+            animation: float-up 8s linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Sparkle effects */
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #F7E7CE;
+            border-radius: 50%;
+            animation: sparkle 3s linear infinite;
+        }
+
+        /* Typewriter effect */
+        .typewriter {
+            overflow: hidden;
+            border-right: 2px solid #FFC1CC;
+            white-space: nowrap;
+            animation: typewriter 4s steps(40) 1s forwards, blink 1s infinite;
+        }
+
+        /* Card hover effects */
+        .love-card {
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        .love-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(255, 179, 186, 0.3);
+        }
+
+        /* Polaroid photo effect */
+        .polaroid {
+            background: white;
+            padding: 8px 8px 24px 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transform: rotate(-2deg);
+            transition: all 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+            .polaroid {
+                padding: 10px 10px 40px 10px;
+            }
+        }
+
+        .polaroid:nth-child(even) {
+            transform: rotate(2deg);
+        }
+
+        .polaroid:hover {
+            transform: rotate(0deg) scale(1.05);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        /* Scrolling animation */
+        .scroll-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .scroll-content {
+            display: inline-flex;
+            animation: scroll-left 12s linear infinite;
+        }
+
+        /* Hide scrollbar */
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Responsive text sizes */
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (min-width: 641px) and (max-width: 1024px) {
+            .hero-title {
+                font-size: 4rem;
+            }
+            .section-title {
+                font-size: 3rem;
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .hero-title {
+                font-size: 6rem;
+            }
+            .section-title {
+                font-size: 4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Hearts -->
+    <div class="floating-hearts" id="floatingHearts"></div>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <!-- Background with sparkles -->
+        <div class="absolute inset-0 bg-gradient-to-br from-romantic-pink via-cream to-light-gold">
+            <!-- Sparkles will be added by JavaScript -->
+        </div>
+
+        <!-- Main content -->
+        <div class="text-center z-10 px-4">
+            <h1 class="hero-title font-romantic text-pastel-red mb-4 md:mb-6 animate-pulse-heart">
+                Happy Birthday Asna
+                <span class="inline-block ml-2 md:ml-4 text-red-400 animate-pulse-heart">❤️</span>
+            </h1>
+
+            <p class="text-lg sm:text-xl md:text-2xl font-elegant text-gray-700 max-w-2xl mx-auto leading-relaxed px-4 mb-8 md:mb-12">
+                You make my world more beautiful just by being in it
+            </p>
+
+            <div class="animate-float">
+                <div class="text-3xl md:text-4xl">💕</div>
+                <p class="text-xs md:text-sm font-cursive text-gray-600 mt-2">
+                    Scroll down for more love
+                </p>
+            </div>
+        </div>
+
+        <!-- Floating elements -->
+        <div class="absolute top-10 sm:top-20 left-4 sm:left-20 animate-float">
+            <span class="text-2xl sm:text-3xl md:text-4xl">🌸</span>
+        </div>
+        <div class="absolute top-20 sm:top-40 right-8 sm:right-32 animate-float" style="animation-delay: 1s;">
+            <span class="text-2xl sm:text-3xl">✨</span>
+        </div>
+        <div class="absolute bottom-20 sm:bottom-32 left-8 sm:left-32 animate-float" style="animation-delay: 2s;">
+            <span class="text-2xl sm:text-3xl">🦋</span>
+        </div>
+        <div class="absolute bottom-10 sm:bottom-20 right-4 sm:right-20 animate-float" style="animation-delay: 0.5s;">
+            <span class="text-3xl sm:text-4xl">🌹</span>
+        </div>
+    </section>
+
+    <!-- Our Story Section -->
+    <section class="py-20 px-4 bg-gradient-to-b from-cream to-romantic-pink">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-8 md:mb-16 px-4">
+                <h2 class="section-title font-romantic text-pastel-red mb-4">Our Love Story</h2>
+                <p class="text-base md:text-lg font-elegant text-gray-700">A journey of hearts, dreams, and endless love</p>
+            </div>
+
+            <div class="relative">
+                <!-- Timeline line -->
+                <div class="absolute left-4 md:left-1/2 md:transform md:-translate-x-1/2 w-1 h-full bg-gradient-to-b from-blush to-pastel-red rounded-full"></div>
+
+                <!-- Story milestones -->
+                <div class="space-y-8 md:space-y-16">
+                    <!-- Milestone 1 -->
+                    <div class="flex items-center">
+                        <div class="w-full md:w-1/2 pl-12 md:pr-8 md:pl-0 md:text-right text-left">
+                            <div class="love-card p-4 md:p-6 rounded-2xl shadow-lg">
+                                <div class="text-3xl md:text-4xl mb-3 md:mb-4">💫</div>
+                                <h3 class="text-xl md:text-2xl font-cursive text-pastel-red mb-2">The Day We Met</h3>
+                                <p class="text-xs md:text-sm font-elegant text-blush mb-2 md:mb-3">December 8th, 2022</p>
+                                <p class="text-sm md:text-base text-gray-700 leading-relaxed">From the moment our eyes met, I knew you were someone special. Your smile lit up the entire room and my heart.</p>
+                            </div>
+                        </div>
+                        <div class="absolute left-4 md:relative md:left-0 z-10">
+                            <div class="w-4 h-4 md:w-6 md:h-6 bg-pastel-red rounded-full border-2 md:border-4 border-white shadow-lg animate-pulse-heart"></div>
+                        </div>
+                        <div class="hidden md:block md:w-1/2"></div>
+                    </div>
+
+                    <!-- Milestone 2 -->
+                    <div class="flex items-center md:flex-row-reverse">
+                        <div class="w-full md:w-1/2 pl-12 md:pl-8 md:pr-0 md:text-left text-left">
+                            <div class="love-card p-4 md:p-6 rounded-2xl shadow-lg">
+                                <div class="text-3xl md:text-4xl mb-3 md:mb-4">🌙</div>
+                                <h3 class="text-xl md:text-2xl font-cursive text-pastel-red mb-2">Our First Date</h3>
+                                <p class="text-xs md:text-sm font-elegant text-blush mb-2 md:mb-3">Kozhikode - Where Magic Began</p>
+                                <p class="text-sm md:text-base text-gray-700 leading-relaxed">In the beautiful city of Kozhikode, time seemed to stop when we were together. Every laugh, every conversation felt like a beautiful melody.</p>
+                            </div>
+                        </div>
+                        <div class="absolute left-4 md:relative md:left-0 z-10">
+                            <div class="w-4 h-4 md:w-6 md:h-6 bg-pastel-red rounded-full border-2 md:border-4 border-white shadow-lg animate-pulse-heart" style="animation-delay: 0.5s;"></div>
+                        </div>
+                        <div class="hidden md:block md:w-1/2"></div>
+                    </div>
+
+                    <!-- Milestone 3 -->
+                    <div class="flex items-center">
+                        <div class="w-full md:w-1/2 pl-12 md:pr-8 md:pl-0 md:text-right text-left">
+                            <div class="love-card p-4 md:p-6 rounded-2xl shadow-lg">
+                                <div class="text-3xl md:text-4xl mb-3 md:mb-4">💖</div>
+                                <h3 class="text-xl md:text-2xl font-cursive text-pastel-red mb-2">Falling Deeper</h3>
+                                <p class="text-xs md:text-sm font-elegant text-blush mb-2 md:mb-3">Hearts Intertwined</p>
+                                <p class="text-sm md:text-base text-gray-700 leading-relaxed">With each passing day, my love for you grew stronger. You became my sunshine, my peace, my everything.</p>
+                            </div>
+                        </div>
+                        <div class="absolute left-4 md:relative md:left-0 z-10">
+                            <div class="w-4 h-4 md:w-6 md:h-6 bg-pastel-red rounded-full border-2 md:border-4 border-white shadow-lg animate-pulse-heart" style="animation-delay: 1s;"></div>
+                        </div>
+                        <div class="hidden md:block md:w-1/2"></div>
+                    </div>
+
+                    <!-- Milestone 4 -->
+                    <div class="flex items-center md:flex-row-reverse">
+                        <div class="w-full md:w-1/2 pl-12 md:pl-8 md:pr-0 md:text-left text-left">
+                            <div class="love-card p-4 md:p-6 rounded-2xl shadow-lg">
+                                <div class="text-3xl md:text-4xl mb-3 md:mb-4">🌟</div>
+                                <h3 class="text-xl md:text-2xl font-cursive text-pastel-red mb-2">Today & Forever</h3>
+                                <p class="text-xs md:text-sm font-elegant text-blush mb-2 md:mb-3">Our Love Story Continues</p>
+                                <p class="text-sm md:text-base text-gray-700 leading-relaxed">Every day with you is a gift. Today we celebrate you, and I promise to love you more with each tomorrow.</p>
+                            </div>
+                        </div>
+                        <div class="absolute left-4 md:relative md:left-0 z-10">
+                            <div class="w-4 h-4 md:w-6 md:h-6 bg-pastel-red rounded-full border-2 md:border-4 border-white shadow-lg animate-pulse-heart" style="animation-delay: 1.5s;"></div>
+                        </div>
+                        <div class="hidden md:block md:w-1/2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Memory Gallery Section -->
+    <section class="py-20 px-4 bg-gradient-to-b from-romantic-pink to-light-gold">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-8 md:mb-16 px-4">
+                <h2 class="section-title font-romantic text-pastel-red mb-4">My Beautiful Angel</h2>
+                <p class="text-base md:text-lg font-elegant text-gray-700">Every photo captures your divine beauty and grace</p>
+            </div>
+
+            <!-- Beautiful Look Photos -->
+            <div class="mb-8 md:mb-16 px-4">
+                <h3 class="text-2xl md:text-3xl font-cursive text-pastel-red mb-6 md:mb-8 text-center">✨ Divine Beauty</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6" id="lookPhotos">
+                    <!-- Photos will be loaded by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Playful Moments - Scrolling -->
+            <div class="px-4">
+                <h3 class="text-2xl md:text-3xl font-cursive text-pastel-red mb-6 md:mb-8 text-center">😄 Playful Moments</h3>
+                
+                <div class="scroll-container">
+                    <div class="scroll-content gap-4 md:gap-6" id="funnyPhotos">
+                        <!-- Photos will be loaded by JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="text-center mt-4">
+                    <p class="text-xs md:text-sm font-cursive text-gray-500 italic">
+                        ✨ Endless playful moments flowing by ✨
+                    </p>
+                </div>
+            </div>
+
+            <div class="text-center mt-8 md:mt-12 px-4">
+                <p class="text-base md:text-lg font-cursive text-gray-700 italic">
+                    "Every picture shows the angel that stole my heart"
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Love Letter Section -->
+    <section class="py-20 px-4 bg-gradient-to-b from-light-gold to-cream relative overflow-hidden">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-8 md:mb-16 px-4">
+                <h2 class="section-title font-romantic text-pastel-red mb-4 animate-pulse">A Letter From My Heart</h2>
+                <p class="text-base md:text-lg font-elegant text-gray-700">Words can never fully express my love for you</p>
+            </div>
+
+            <div class="relative">
+                <!-- Envelope (initially visible) -->
+                <div id="envelope" class="cursor-pointer">
+                    <div class="bg-gradient-to-br from-cream to-romantic-pink p-6 sm:p-8 md:p-12 rounded-2xl shadow-2xl relative overflow-hidden border-4 border-white hover:scale-105 transition-transform duration-300">
+                        <!-- Envelope flap -->
+                        <div class="absolute top-0 left-0 right-0 h-12 md:h-16 bg-gradient-to-b from-pastel-red to-blush opacity-80 rounded-t-2xl"></div>
+                        
+                        <!-- Wax seal -->
+                        <div class="absolute top-6 md:top-8 left-1/2 transform -translate-x-1/2 w-8 h-8 md:w-12 md:h-12 bg-red-500 rounded-full flex items-center justify-center text-white text-sm md:text-xl shadow-lg animate-pulse-heart">
+                            ❤️
+                        </div>
+
+                        <div class="text-center mt-6 md:mt-8">
+                            <div class="text-4xl md:text-6xl mb-4 animate-float">💌</div>
+                            <h3 class="text-xl md:text-2xl font-cursive text-pastel-red mb-4">
+                                Click to Open My Heart
+                            </h3>
+                            <p class="text-sm md:text-base text-gray-600 font-elegant px-4">
+                                A special message awaits you inside...
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Letter (initially hidden) -->
+                <div id="letter" class="hidden">
+                    <div class="bg-white p-6 sm:p-8 md:p-12 rounded-lg shadow-2xl relative overflow-hidden">
+                        <!-- Paper texture overlay -->
+                        <div class="absolute inset-0 opacity-5 bg-gradient-to-br from-gray-100 to-gray-200"></div>
+                        
+                        <!-- Letter content -->
+                        <div class="relative z-10">
+                            <div id="letterText" class="font-elegant text-gray-800 leading-relaxed text-sm sm:text-base md:text-lg whitespace-pre-line">
+                                <!-- Text will be typed here -->
+                            </div>
+                        </div>
+
+                        <!-- Decorative elements -->
+                        <div class="absolute top-4 right-4 text-2xl opacity-20 animate-float">💕</div>
+                        <div class="absolute bottom-4 left-4 text-2xl opacity-20 animate-float" style="animation-delay: 1s;">🌹</div>
+                        
+                        <!-- Paper fold effect -->
+                        <div class="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-gray-100 to-transparent opacity-30"></div>
+                    </div>
+
+                    <!-- Floating hearts around the letter -->
+                    <div class="absolute -top-4 -left-4 text-3xl animate-float">💖</div>
+                    <div class="absolute -top-2 -right-6 text-2xl animate-float" style="animation-delay: 1s;">💝</div>
+                    <div class="absolute -bottom-4 -right-4 text-3xl animate-float" style="animation-delay: 0.5s;">💕</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reasons Section -->
+    <section class="py-20 px-4 bg-gradient-to-b from-cream to-romantic-pink">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-8 md:mb-16 px-4">
+                <h2 class="section-title font-romantic text-pastel-red mb-4">Reasons Why I Love You</h2>
+                <p class="text-base md:text-lg font-elegant text-gray-700">There are countless reasons, but here are just a few</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 px-4" id="reasonsGrid">
+                <!-- Reasons will be loaded by JavaScript -->
+            </div>
+
+            <div class="text-center mt-8 md:mt-16 px-4">
+                <p class="text-xl md:text-2xl font-cursive text-pastel-red italic">
+                    "And a million more reasons that words cannot express..."
+                </p>
+                <div class="text-3xl md:text-4xl mt-4 animate-float">💕</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Surprise Section -->
+    <section class="py-20 px-4 bg-gradient-to-b from-romantic-pink to-light-gold relative overflow-hidden">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="text-center mb-8 md:mb-16 px-4">
+                <h2 class="section-title font-romantic text-pastel-red mb-4">A Special Surprise</h2>
+                <p class="text-base md:text-lg font-elegant text-gray-700">I have something special just for you</p>
+            </div>
+
+            <!-- Surprise Button (initially visible) -->
+            <div id="surpriseButton" class="flex flex-col items-center">
+                <button class="bg-gradient-to-r from-pastel-red to-blush text-white px-8 md:px-12 py-4 md:py-6 rounded-full text-xl md:text-2xl font-cursive shadow-2xl hover:scale-105 transition-all duration-300 border-4 border-white">
+                    Click for a Surprise 🎁
+                </button>
+
+                <div class="mt-8 text-4xl md:text-6xl animate-float">✨</div>
+            </div>
+
+            <!-- Surprise Content (initially hidden) -->
+            <div id="surpriseContent" class="hidden">
+                <div class="bg-white p-6 sm:p-8 md:p-12 rounded-3xl shadow-2xl relative overflow-hidden">
+                    <div class="relative z-10">
+                        <div class="text-4xl md:text-6xl mb-6 animate-pulse-heart">🎊</div>
+
+                        <h3 class="text-3xl md:text-4xl font-romantic text-pastel-red mb-6">
+                            Surprise!
+                        </h3>
+
+                        <div class="space-y-4 text-base md:text-lg font-elegant text-gray-700">
+                            <p>I'm so lucky to have you in my life.</p>
+                            <p class="text-xl md:text-2xl font-cursive text-pastel-red">I love you endlessly ❤️</p>
+                            <p class="text-sm italic">You deserve all the happiness in the world, today and always.</p>
+                        </div>
+
+                        <div class="mt-8 text-4xl md:text-5xl animate-pulse-heart">💖</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Background decorations -->
+            <div class="absolute top-10 left-10 animate-float">
+                <span class="text-3xl md:text-4xl opacity-30">🎈</span>
+            </div>
+            <div class="absolute top-20 right-20 animate-float" style="animation-delay: 1s;">
+                <span class="text-2xl md:text-3xl opacity-30">🎀</span>
+            </div>
+            <div class="absolute bottom-20 left-20 animate-float" style="animation-delay: 2s;">
+                <span class="text-3xl md:text-4xl opacity-30">🎂</span>
+            </div>
+            <div class="absolute bottom-10 right-10 animate-float" style="animation-delay: 0.5s;">
+                <span class="text-2xl md:text-3xl opacity-30">🌈</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final Section -->
+    <section class="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-light-gold via-romantic-pink to-cream">
+        <!-- Background decorations -->
+        <div class="absolute inset-0">
+            <!-- Floating elements will be added by JavaScript -->
+        </div>
+
+        <div class="text-center z-10 px-4 max-w-4xl mx-auto">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-romantic text-pastel-red mb-6 md:mb-8 leading-tight animate-pulse">
+                Happy Birthday<br>My Love, Asna
+                <span class="inline-block ml-2 md:ml-4 text-red-400 animate-pulse-heart">❤️</span>
+            </h1>
+
+            <div class="mb-8 md:mb-12">
+                <p class="text-lg sm:text-xl md:text-2xl font-elegant text-gray-700 leading-relaxed mb-4 md:mb-6">
+                    This is just a small gift compared to what you mean to me.
+                </p>
+                
+                <p class="text-base md:text-lg font-cursive text-gray-600 italic">
+                    You are my sunshine, my heart, my everything.
+                </p>
+            </div>
+
+            <div class="space-y-6">
+                <div class="flex justify-center space-x-4 text-3xl md:text-4xl">
+                    <span class="animate-float">🌟</span>
+                    <span class="animate-pulse-heart">💖</span>
+                    <span class="animate-float" style="animation-delay: 0.6s;">🌟</span>
+                </div>
+
+                <p class="text-xl md:text-2xl font-cursive text-pastel-red animate-pulse">
+                    Forever and always, you are loved ✨
+                </p>
+            </div>
+
+            <div class="mt-12 md:mt-16">
+                <p class="text-xs md:text-sm font-elegant text-gray-500 italic">
+                    Made with endless love, just for you 💕
+                </p>
+            </div>
+        </div>
+
+        <!-- Corner decorations -->
+        <div class="absolute top-10 left-10 animate-float">
+            <span class="text-4xl md:text-5xl opacity-40">🎂</span>
+        </div>
+        <div class="absolute top-10 right-10 animate-float" style="animation-delay: 1s;">
+            <span class="text-3xl md:text-4xl opacity-40">🎈</span>
+        </div>
+        <div class="absolute bottom-10 left-10 animate-float" style="animation-delay: 2s;">
+            <span class="text-3xl md:text-4xl opacity-40">🌹</span>
+        </div>
+        <div class="absolute bottom-10 right-10 animate-float" style="animation-delay: 0.5s;">
+            <span class="text-4xl md:text-5xl opacity-40">💝</span>
+        </div>
+    </section>
+
+    <script>
+        // Photo data
+        const lookMemories = [
+            { id: 1, title: "Angelic Beauty", description: "My beautiful angel, radiating pure grace", src: "look/1.jpg" },
+            { id: 2, title: "Divine Elegance", description: "Looking absolutely stunning, my love", src: "look/2.jpg" },
+            { id: 3, title: "Natural Goddess", description: "Your natural beauty takes my breath away", src: "look/3.jpg" },
+            { id: 4, title: "Perfect Angel", description: "Perfection captured in a single frame", src: "look/4.jpg" },
+            { id: 5, title: "Heavenly Grace", description: "Grace and beauty beyond words", src: "look/5.jpg" },
+            { id: 6, title: "My Heart's Desire", description: "The most beautiful woman in the world", src: "look/6.jpg" },
+            { id: 7, title: "Radiant Angel", description: "Your beauty shines like starlight", src: "look/7.jpg" },
+            { id: 8, title: "Pure Perfection", description: "An angel walking on earth", src: "look/8.jpg" }
+        ];
+
+        const funnyMemories = [
+            { id: 1, title: "Adorable Moments", description: "Your smile lights up my entire world", src: "funny/1.jpg" },
+            { id: 2, title: "Playful Angel", description: "Being adorably silly, my sweet love", src: "funny/2.jpg" },
+            { id: 3, title: "Joyful Spirit", description: "Your happiness is my greatest treasure", src: "funny/3.jpg" },
+            { id: 4, title: "Sweet Laughter", description: "Your laugh is music to my soul", src: "funny/4.jpg" },
+            { id: 5, title: "Pure Joy", description: "Happiness looks so beautiful on you", src: "funny/5.jpg" },
+            { id: 6, title: "Cheerful Beauty", description: "My heart skips a beat seeing you smile", src: "funny/6.jpg" },
+            { id: 7, title: "Carefree Angel", description: "Your carefree spirit fills my heart with love", src: "funny/7.jpg" },
+            { id: 8, title: "Sweet Silliness", description: "Being wonderfully adorable, as always", src: "funny/8.jpg" }
+        ];
+
+        const reasons = [
+            { title: "Your Beautiful Smile", description: "It lights up my entire world and makes everything better", icon: "😊" },
+            { title: "Your Kind Heart", description: "The way you care for others shows your beautiful soul", icon: "💝" },
+            { title: "Your Infectious Laugh", description: "It's the most beautiful sound in the universe", icon: "😄" },
+            { title: "Your Gentle Touch", description: "Every hug, every hand-hold feels like home", icon: "🤗" },
+            { title: "Your Amazing Mind", description: "Your thoughts, dreams, and conversations fascinate me", icon: "🧠" },
+            { title: "Your Strength", description: "You inspire me with your courage and determination", icon: "💪" },
+            { title: "Your Playful Spirit", description: "You make every moment fun and full of joy", icon: "🎈" },
+            { title: "Your Love", description: "The way you love me makes me the luckiest person alive", icon: "💖" },
+            { title: "Your Dreams", description: "I love being part of your journey and supporting your goals", icon: "⭐" },
+            { title: "Simply Being You", description: "Every little thing about you makes you perfectly imperfect", icon: "🌟" }
+        ];
+
+        // Load photos
+        function loadPhotos() {
+            const lookPhotosContainer = document.getElementById('lookPhotos');
+            const funnyPhotosContainer = document.getElementById('funnyPhotos');
+
+            // Load look photos
+            lookMemories.forEach(memory => {
+                const photoDiv = document.createElement('div');
+                photoDiv.className = 'polaroid cursor-pointer group hover:scale-105 transition-transform duration-300';
+                photoDiv.innerHTML = `
+                    <div class="aspect-square bg-gradient-to-br from-cream to-blush rounded-lg overflow-hidden mb-3 md:mb-4 relative">
+                        <img src="${memory.src}" alt="${memory.title}" class="w-full h-full object-cover rounded-lg transition-transform duration-300 group-hover:scale-110" 
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="w-full h-full bg-gradient-to-br from-cream to-blush rounded-lg flex items-center justify-center text-4xl md:text-6xl opacity-50" style="display: none;">📸</div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="font-cursive text-base md:text-lg text-pastel-red mb-1">${memory.title}</h3>
+                        <p class="text-xs md:text-sm text-gray-600 font-elegant">${memory.description}</p>
+                        <div class="mt-2">
+                            <span class="inline-block px-2 py-1 rounded-full text-xs font-cursive bg-pink-100 text-pink-600">✨ Beautiful</span>
+                        </div>
+                    </div>
+                `;
+                lookPhotosContainer.appendChild(photoDiv);
+            });
+
+            // Load funny photos (duplicate for scrolling effect)
+            const allFunnyPhotos = [...funnyMemories, ...funnyMemories];
+            allFunnyPhotos.forEach(memory => {
+                const photoDiv = document.createElement('div');
+                photoDiv.className = 'polaroid cursor-pointer group flex-shrink-0 w-48 sm:w-56 md:w-64 hover:scale-105 transition-transform duration-300';
+                photoDiv.innerHTML = `
+                    <div class="aspect-square bg-gradient-to-br from-cream to-blush rounded-lg overflow-hidden mb-3 md:mb-4 relative">
+                        <img src="${memory.src}" alt="${memory.title}" class="w-full h-full object-cover rounded-lg transition-transform duration-300 group-hover:scale-110"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="w-full h-full bg-gradient-to-br from-cream to-blush rounded-lg flex items-center justify-center text-4xl md:text-6xl opacity-50" style="display: none;">😄</div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="font-cursive text-base md:text-lg text-pastel-red mb-1">${memory.title}</h3>
+                        <p class="text-xs md:text-sm text-gray-600 font-elegant">${memory.description}</p>
+                        <div class="mt-2">
+                            <span class="inline-block px-2 py-1 rounded-full text-xs font-cursive bg-yellow-100 text-yellow-600">😄 Fun</span>
+                        </div>
+                    </div>
+                `;
+                funnyPhotosContainer.appendChild(photoDiv);
+            });
+        }
+
+        // Load reasons
+        function loadReasons() {
+            const reasonsContainer = document.getElementById('reasonsGrid');
+            
+            reasons.forEach(reason => {
+                const reasonDiv = document.createElement('div');
+                reasonDiv.className = 'love-card p-4 md:p-6 rounded-2xl shadow-lg cursor-pointer group';
+                reasonDiv.innerHTML = `
+                    <div class="text-3xl md:text-4xl mb-3 md:mb-4 text-center group-hover:scale-110 transition-transform duration-300">${reason.icon}</div>
+                    <h3 class="text-lg md:text-xl font-cursive text-pastel-red mb-2 md:mb-3 text-center">${reason.title}</h3>
+                    <p class="text-gray-700 text-center leading-relaxed font-elegant text-sm md:text-base">${reason.description}</p>
+                    <div class="text-center mt-3 md:mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span class="text-red-400 text-xl md:text-2xl animate-pulse-heart">❤️</span>
+                    </div>
+                `;
+                reasonsContainer.appendChild(reasonDiv);
+            });
+        }
+
+        // Floating hearts
+        function createFloatingHearts() {
+            const heartsContainer = document.getElementById('floatingHearts');
+            
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = ['💖', '💕', '💗', '💝', '❤️', '🌹'][Math.floor(Math.random() * 6)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = (8 + Math.random() * 4) + 's';
+                
+                heartsContainer.appendChild(heart);
+                
+                setTimeout(() => {
+                    heart.remove();
+                }, 12000);
+            }, 3000);
+        }
+
+        // Love letter functionality
+        function setupLoveLetter() {
+            const envelope = document.getElementById('envelope');
+            const letter = document.getElementById('letter');
+            const letterText = document.getElementById('letterText');
+            
+            const loveLetterText = `My Dearest Asna,
+
+As I sit here writing this letter, my heart overflows with love for you. Today marks another year of your beautiful existence, and I am so grateful to be part of your journey.
+
+From the moment you entered my life, everything changed. Your laughter became my favorite melody, your smile my daily sunshine, and your love my greatest treasure. You have this incredible way of making ordinary moments feel magical, and every day with you feels like a gift.
+
+I love how you light up when you talk about your passions, how you care so deeply for everyone around you, and how you make me want to be a better person just by being yourself. Your kindness, your strength, your beautiful soul - everything about you amazes me.
+
+On this special day, I want you to know that you are loved beyond measure. You are my heart, my home, my forever. Thank you for being the incredible woman you are, for loving me, and for making life so wonderfully beautiful.
+
+Happy Birthday, my love. Here's to many more years of adventures, laughter, and endless love together.
+
+Forever yours,
+With all my love ❤️`;
+
+            envelope.addEventListener('click', () => {
+                envelope.style.display = 'none';
+                letter.classList.remove('hidden');
+                
+                // Typewriter effect
+                let index = 0;
+                const typeWriter = () => {
+                    if (index < loveLetterText.length) {
+                        letterText.innerHTML = loveLetterText.slice(0, index + 1) + '<span class="animate-pulse text-pastel-red">|</span>';
+                        index++;
+                        setTimeout(typeWriter, 30);
+                    } else {
+                        letterText.innerHTML = loveLetterText;
+                    }
+                };
+                
+                setTimeout(typeWriter, 500);
+            });
+        }
+
+        // Surprise functionality
+        function setupSurprise() {
+            const surpriseButton = document.getElementById('surpriseButton');
+            const surpriseContent = document.getElementById('surpriseContent');
+            
+            document.querySelector('#surpriseButton button').addEventListener('click', () => {
+                surpriseButton.style.display = 'none';
+                surpriseContent.classList.remove('hidden');
+                
+                // Add confetti effect
+                createConfetti();
+            });
+        }
+
+        // Confetti effect
+        function createConfetti() {
+            const colors = ['🎉', '🎊', '✨', '💖', '🌟', '💕'];
+            
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.innerHTML = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.position = 'fixed';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.top = '-50px';
+                    confetti.style.fontSize = '24px';
+                    confetti.style.pointerEvents = 'none';
+                    confetti.style.zIndex = '1000';
+                    confetti.style.animation = 'float-up 3s linear forwards';
+                    
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 3000);
+                }, i * 100);
+            }
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', () => {
+            loadPhotos();
+            loadReasons();
+            createFloatingHearts();
+            setupLoveLetter();
+            setupSurprise();
+        });
+    </script>
+</body>
 </html>
