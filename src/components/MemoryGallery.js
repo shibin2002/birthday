@@ -8,7 +8,7 @@ const MemoryGallery = () => {
     threshold: 0.1
   });
 
-  const [isAutoScrolling, setIsAutoScrolling] = React.useState(true);
+  // Removed unused variables for build
 
   // Beautiful memories with real photos
   const lookMemories = [
@@ -103,7 +103,7 @@ const MemoryGallery = () => {
     
   ];
 
-  const allMemories = [...lookMemories, ...funnyMemories];
+  // Removed unused variable for build
 
   return (
     <section className="py-20 px-4 bg-gradient-to-b from-romantic-pink to-light-gold">

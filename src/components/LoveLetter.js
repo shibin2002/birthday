@@ -45,7 +45,7 @@ With all my love ❤️`;
 
       return () => clearInterval(timer);
     }
-  }, [inView, isTyping, displayedText, isLetterOpen]);
+  }, [inView, isTyping, displayedText, isLetterOpen, loveLetterText]);
 
   const openLetter = () => {
     setIsLetterOpen(true);
